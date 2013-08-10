@@ -1,5 +1,5 @@
 r"""
-A little Python 3.3 code to perform some New Zealand income tax calculations.
+A little Python 3.3 code to perform New Zealand income tax calculations.
 
 AUTHORS:
 
