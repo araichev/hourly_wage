@@ -1,13 +1,9 @@
 r"""
-Python 3.3 code to perform some New Zealand income tax calculations.
+A little Python 3.3 code to perform some New Zealand income tax calculations.
 
 AUTHORS:
 
 - Alex Raichev (2013-03-19)
-
-LICENSE:
-
-GPLv3.
 """
 from numpy import inf
 from scipy.optimize import brentq
