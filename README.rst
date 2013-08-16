@@ -4,8 +4,7 @@ A little Python 3.3 program to perform some New Zealand income tax calculations
 
 Requires
 --------
-Pandas, but only to pretty print this table obtained from the ``print_table``
-function::
+Pandas, but only to pretty print this table obtained from running ``hourly_wage`` as a script::
 
     Gross hourly income given
     net (weekly, yearly) income for 52 weeks per year and
@@ -40,4 +39,4 @@ function::
 
 Todo
 -----
-Remove Pandas dependency and use simpler table formatting machinery.
+Remove Pandas dependency, which is overkill, and use a simpler table formatter.
