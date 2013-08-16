@@ -5,7 +5,7 @@ A little Python 3.3 program to perform some New Zealand income tax calculations.
 Suppose you work in New Zealand, would like to earn a given net weekly income (for 52 weeks per year) after income tax, and would like to work a given number of hours per week (for 47 weeks per year; NZ workers get 4 weeks annual leave plus roughly 1 week of public holidays). 
 What gross hourly income must you earn?
 
-To answer that question, i used the 1 April 2012 to 31 March 2013 NZ income tax rates for individuals, wrote this Python program, and used it to make this table::
+To answer this question, i used the 1 April 2012 to 31 March 2013 NZ income tax rates for individuals, wrote this Python program, and used it to make this table::
 
     Gross hourly income given
     net (weekly, yearly) income for 52 weeks per year and
