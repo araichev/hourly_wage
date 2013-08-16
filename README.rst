@@ -41,11 +41,18 @@ To answer this question, i used the 1 April 2012 to 31 March 2013 NZ income tax 
 
 The gross hourly incomes needed are displayed in the body of the table in New Zealand dollars, rounded to the nearest dollar and excluding GST. For example, to earn $1200/week after tax, working 25 hours/week, you need to earn $68/hour before tax.
 
+Usage
+------
+Run as script to produce the table above.
+Otherwise use as a module to assist in NZ tax calculations.
+
 Requires
 --------
-Pandas to pretty print the table.
+- Scipy, for scipy.optimize.brentq (a root finder)
+- Pandas, to pretty print the table (which is overkill)
 
 
 Todo
 -----
-Remove the Pandas dependency, which is overkill, and use a simpler table formatter.
+Cut down dependencies.
+For instance, use a simpler table formatter than Pandas :-)

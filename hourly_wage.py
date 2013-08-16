@@ -5,7 +5,6 @@ AUTHORS:
 
 - Alex Raichev (2013-03-19)
 """
-from numpy import inf
 from scipy.optimize import brentq
 
 # April 2012 to March 2013 New Zealand income tax tiers for individuals 
@@ -14,7 +13,7 @@ NZ_TAX_TIERS_2012 = [
   (14000, 0.105), 
   (48000, 0.175), 
   (70000, 0.3), 
-  (inf, 0.33)
+  (10e12, 0.33)
 ]
 
 def tax(gross_yearly_income, tax_tiers=NZ_TAX_TIERS_2012, ndigits=2):
