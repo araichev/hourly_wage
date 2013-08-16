@@ -123,7 +123,7 @@ def gross_hourly_income(net_weekly_income, hours_per_week, weeks_per_year=47,
     return round(ghi, ndigits)
 
 HOURS = [5*i for i in range(1, 9)]
-NET_WEEKLY_INCOMES = [100*i for i in range(1, 25)]
+NET_WEEKLY_INCOMES = [100*i for i in range(1, 26)]
 
 def print_table(hours=HOURS, net_weekly_incomes=NET_WEEKLY_INCOMES):
     import pandas as pd
