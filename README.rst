@@ -47,5 +47,5 @@ Requires
 
 Usage
 ------
-Run as script to produce the table above.
+Run as a script to produce the table above.
 Otherwise use as a module to assist in NZ tax calculations.
