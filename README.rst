@@ -1,10 +1,11 @@
 Hourly Wage
 ============
-A little Python 3.3 program to perform some New Zealand income tax calculations
+A little Python 3.3 program to perform some New Zealand income tax calculations.
 
-Requires
---------
-Pandas, but only to pretty print this table obtained from running ``hourly_wage`` as a script::
+Suppose you work in New Zealand, would like to earn a given net weekly income (for 52 weeks per year) after income tax, and would like to work a given number of hours per week (for 47 weeks per year; NZ workers get 4 weeks annual leave plus roughly 1 week of public holidays). 
+What gross hourly income must you earn?
+
+To answer that question, i used the 1 April 2012 to 31 March 2013 NZ income tax rates for individuals, wrote this Python program, and used it to make this table::
 
     Gross hourly income given
     net (weekly, yearly) income for 52 weeks per year and
@@ -38,6 +39,13 @@ Pandas, but only to pretty print this table obtained from running ``hourly_wage`
     ($2500, $130000)  $767  $383  $256  $192  $153  $128  $109  $96
 
 
+The gross hourly incomes needed are displayed in the body of the table in New Zealand dollars, rounded to the nearest dollar and excluding GST. For example, to earn $1200/week after tax, working 25 hours/week, you need to earn $68/hour before tax.
+
+Requires
+--------
+Pandas to pretty print the table.
+
+
 Todo
 -----
-Remove Pandas dependency, which is overkill, and use a simpler table formatter.
+Remove the Pandas dependency, which is overkill, and use a simpler table formatter.
