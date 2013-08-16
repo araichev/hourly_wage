@@ -5,7 +5,7 @@ A little Python 3.3 program to perform some New Zealand income tax calculations
 Requires
 --------
 Pandas, but only to pretty print this table obtained from the ``print_table``
-function:
+function::
 
     Gross hourly income given
     net (weekly, yearly) income for 52 weeks per year and
