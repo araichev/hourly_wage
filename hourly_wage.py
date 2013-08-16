@@ -15,6 +15,7 @@ NZ_TAX_TIERS_2012 = [
   (70000, 0.3), 
   (10e12, 0.33)
 ]
+WORK_WEEKS_PER_YEAR = 47 # Considering 4 weeks annual leave and holidays
 
 def tax(gross_yearly_income, tax_tiers=NZ_TAX_TIERS_2012, ndigits=2):
     r"""
@@ -51,7 +52,8 @@ def tax(gross_yearly_income, tax_tiers=NZ_TAX_TIERS_2012, ndigits=2):
         previous_cutoff = cutoff
     return round(result, ndigits), round(result/gyi, ndigits)
 
-def tax_h(gross_hourly_income, hours_per_week, weeks_per_year=47, 
+def tax_h(gross_hourly_income, hours_per_week, 
+          work_weeks_per_year=WORK_WEEKS_PER_YEAR, 
           tax_tiers=NZ_TAX_TIERS_2012, ndigits=2):
     r"""
     Return the income tax due and the effective tax rate on the 
@@ -64,7 +66,7 @@ def tax_h(gross_hourly_income, hours_per_week, weeks_per_year=47,
         >>> print(tax_h(75, 20))
         (14185.0, 0.2)
     """
-    gyi = gross_hourly_income*hours_per_week*weeks_per_year
+    gyi = gross_hourly_income*hours_per_week*work_weeks_per_year
     return tax(gyi, tax_tiers=tax_tiers, ndigits=ndigits)
 
 def gross_yearly_income(net_yearly_income, tax_tiers=NZ_TAX_TIERS_2012, 
@@ -91,7 +93,8 @@ def gross_yearly_income(net_yearly_income, tax_tiers=NZ_TAX_TIERS_2012,
     gyi = brentq(f, 1, 1e9)  
     return round(gyi, ndigits)
 
-def gross_hourly_income(net_weekly_income, hours_per_week, weeks_per_year=47, 
+def gross_hourly_income(net_weekly_income, hours_per_week, 
+                        work_weeks_per_year=WORK_WEEKS_PER_YEAR, 
                         tax_tiers=NZ_TAX_TIERS_2012, ndigits=2):
     r"""
     Return the gross hourly income required to earn the given net weekly 
@@ -118,27 +121,67 @@ def gross_hourly_income(net_weekly_income, hours_per_week, weeks_per_year=47,
         0.22 0.22
     """    
     gyi = gross_yearly_income(net_weekly_income*52)
-    ghi = gyi/(hours_per_week*weeks_per_year)
+    ghi = gyi/(hours_per_week*work_weeks_per_year)
     return round(ghi, ndigits)
 
 HOURS = [5*i for i in range(1, 9)]
 NET_WEEKLY_INCOMES = [100*i for i in range(1, 26)]
 
-def print_table(hours=HOURS, net_weekly_incomes=NET_WEEKLY_INCOMES):
-    import pandas as pd
-    import textwrap
+def max_len(items):
+    """
+    Return the length of the longest item (when converted to a string) 
+    in the given list.
+    """
+    return max(len(str(item)) for item in items)
 
-    nwis = [(x, 52*x) for x in net_weekly_incomes]
-    nwis_str = [('$' + str(nwi[0]), '$' + str(nwi[1])) for nwi in nwis]
-    data = [[ '$' + str(int(gross_hourly_income(nwi[0], hour))) 
+def print_table(hours=HOURS, net_weekly_incomes=NET_WEEKLY_INCOMES):
+    # import pandas as pd
+    #
+    # nwis = [(x, 52*x) for x in net_weekly_incomes]
+    # nwis_str = [('$' + str(nwi[0]), '$' + str(nwi[1])) for nwi in nwis]
+    # data = [[ '$' + str(int(gross_hourly_income(nwi[0], hour))) 
+    #         for hour in hours] for nwi in nwis]
+    # df = pd.DataFrame(data, index=nwis_str, columns=hours)
+    # print(textwrap.dedent("""
+    #   Gross hourly income given
+    #   net (weekly, yearly) income for 52 weeks per year and
+    #   hours worked per week for 47 weeks per year
+    #   -------------------------------------------------------"""))
+    # print(df)
+
+    # Print without Pandas to reduce third-party module dependecies. 
+    import textwrap
+    
+    # Create the table
+    nwis = net_weekly_incomes
+    col_header = [' '] + [str(h) for h in hours]
+    table = [['($%s, $%s)' % (nwi, 52*nwi)] +\
+            [ '$' + str(int(gross_hourly_income(nwi, hour))) 
             for hour in hours] for nwi in nwis]
-    df = pd.DataFrame(data, index=nwis_str, columns=hours)
-    print(textwrap.dedent("""
-      Gross hourly income given
-      net (weekly, yearly) income for 52 weeks per year and
-      hours worked per week for 47 weeks per year
-      -------------------------------------------------------"""))
-    print(df)
+    table = [col_header] + table
+    nrows = len(table)
+    ncols = len(table[0])
+
+    # Compute right justification amounts for each column.
+    # Left pad each column except the firsts by 2 spaces.
+    col_rjusts = [max_len([table[i][0] for i in range(nrows)])]
+    col_rjusts.extend(  
+      [max_len([table[i][j] for i in range(nrows)]) + 2
+       for j in range(1, ncols)]
+    )
+
+    # Print the table
+    print(textwrap.dedent("""\
+      +-------------------------------------------------------+
+      | Gross hourly income given                             |
+      | net (weekly, yearly) income for 52 weeks per year and |
+      | hours worked per week for %s weeks per year           |
+      +-------------------------------------------------------+""" %\
+      WORK_WEEKS_PER_YEAR))
+    for i in range(nrows):
+        for j in range(ncols):
+            print(table[i][j].rjust(col_rjusts[j]), end='')
+        print() 
 
 if __name__ == '__main__':
     print_table()
