@@ -1,5 +1,5 @@
 r"""
-A little Python 3.3 code to perform New Zealand income tax calculations.
+A little Python 3.3 program to perform New Zealand income tax calculations.
 
 AUTHORS:
 
@@ -121,3 +121,25 @@ def gross_hourly_income(net_weekly_income, hours_per_week, weeks_per_year=47,
     gyi = gross_yearly_income(net_weekly_income*52)
     ghi = gyi/(hours_per_week*weeks_per_year)
     return round(ghi, ndigits)
+
+HOURS = [5*i for i in range(1, 9)]
+NET_WEEKLY_INCOMES = [100*i for i in range(1, 25)]
+
+def print_table(hours=HOURS, net_weekly_incomes=NET_WEEKLY_INCOMES):
+    import pandas as pd
+    import textwrap
+
+    nwis = [(x, 52*x) for x in net_weekly_incomes]
+    nwis_str = [('$' + str(nwi[0]), '$' + str(nwi[1])) for nwi in nwis]
+    data = [[ '$' + str(int(gross_hourly_income(nwi[0], hour))) 
+            for hour in hours] for nwi in nwis]
+    df = pd.DataFrame(data, index=nwis_str, columns=hours)
+    print(textwrap.dedent("""
+      Gross hourly income given
+      net (weekly, yearly) income for 52 weeks per year and
+      hours worked per week for 47 weeks per year
+      -------------------------------------------------------"""))
+    print(df)
+
+if __name__ == '__main__':
+    print_table()
