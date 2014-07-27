@@ -1,5 +1,6 @@
 r"""
-A little Python 3.3 program to perform New Zealand income tax calculations.
+The functions below compute gross earnings from net earnings subject to
+New Zealand income tax rates for April 2014 to March 2015.
 
 AUTHORS:
 
@@ -7,9 +8,9 @@ AUTHORS:
 """
 from scipy.optimize import brentq
 
-# April 2012 to March 2013 New Zealand income tax tiers for individuals 
+# April 2014 to March 2015 New Zealand income tax tiers for individuals 
 # and their corresponding tax rates.
-NZ_TAX_TIERS_2012 = [
+NZ_TAX_TIERS_2014 = [
   (14000, 0.105), 
   (48000, 0.175), 
   (70000, 0.3), 
@@ -17,7 +18,7 @@ NZ_TAX_TIERS_2012 = [
 ]
 WORK_WEEKS_PER_YEAR = 47 # Considering 4 weeks annual leave and holidays
 
-def tax(gross_yearly_income, tax_tiers=NZ_TAX_TIERS_2012, ndigits=2):
+def tax(gross_yearly_income, tax_tiers=NZ_TAX_TIERS_2014, ndigits=2):
     r"""
     Return the income tax due and the effective tax rate on the given 
     gross yearly income.    
@@ -53,8 +54,8 @@ def tax(gross_yearly_income, tax_tiers=NZ_TAX_TIERS_2012, ndigits=2):
     return round(result, ndigits), round(result/gyi, ndigits)
 
 def tax_h(gross_hourly_income, hours_per_week, 
-          work_weeks_per_year=WORK_WEEKS_PER_YEAR, 
-          tax_tiers=NZ_TAX_TIERS_2012, ndigits=2):
+  work_weeks_per_year=WORK_WEEKS_PER_YEAR, tax_tiers=NZ_TAX_TIERS_2014,
+  ndigits=2):
     r"""
     Return the income tax due and the effective tax rate on the 
     gross yearly income `gross_hourly_income*hours_per_week*weeks_per_year`.
@@ -69,8 +70,8 @@ def tax_h(gross_hourly_income, hours_per_week,
     gyi = gross_hourly_income*hours_per_week*work_weeks_per_year
     return tax(gyi, tax_tiers=tax_tiers, ndigits=ndigits)
 
-def gross_yearly_income(net_yearly_income, tax_tiers=NZ_TAX_TIERS_2012, 
-                        ndigits=2):
+def gross_yearly_income(net_yearly_income, tax_tiers=NZ_TAX_TIERS_2014, 
+  ndigits=2):
     r"""
     Return the gross yearly income required to earn the given   
     net yearly income after subtracting income tax specified by the given 
@@ -94,8 +95,8 @@ def gross_yearly_income(net_yearly_income, tax_tiers=NZ_TAX_TIERS_2012,
     return round(gyi, ndigits)
 
 def gross_hourly_income(net_weekly_income, hours_per_week, 
-                        work_weeks_per_year=WORK_WEEKS_PER_YEAR, 
-                        tax_tiers=NZ_TAX_TIERS_2012, ndigits=2):
+  work_weeks_per_year=WORK_WEEKS_PER_YEAR, tax_tiers=NZ_TAX_TIERS_2014,
+  ndigits=2):
     r"""
     Return the gross hourly income required to earn the given net weekly 
     income (for 52 weeks per year) when working the given number of hours 

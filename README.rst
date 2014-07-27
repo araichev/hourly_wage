@@ -1,12 +1,11 @@
 Hourly Wage
 ============
-A little Python 3.3 program to perform some New Zealand income tax calculations.
-
-Suppose you work in New Zealand, would like to earn a given net weekly income (for 52 weeks per year) after income tax, and would like to work a given number of hours per week (for 47 weeks per year; NZ workers get 4 weeks annual leave plus roughly 1 week of public holidays). 
+Suppose you work in New Zealand, would like to earn a given net weekly income for 52 weeks per year after income tax, and would like to work a given number of hours per week for 47 weeks per year (*). 
 What gross hourly income must you earn?
 
-To answer this question, i used the 1 April 2012 to 31 March 2013 NZ income tax rates for individuals, wrote this Python program, and used it to make this table::
+This little Python 3 program answers that question::
 
+    ~> python3 hourly_wage.py
     +-------------------------------------------------------+
     | Gross hourly income given                             |
     | net (weekly, yearly) income for 52 weeks per year and |
@@ -39,13 +38,11 @@ To answer this question, i used the 1 April 2012 to 31 March 2013 NZ income tax 
     ($2400, $124800)  $734  $367  $244  $183  $146  $122  $104  $91
     ($2500, $130000)  $767  $383  $256  $192  $153  $128  $109  $96
 
-The gross hourly incomes needed are displayed in the body of the table in New Zealand dollars, rounded to the nearest dollar and excluding GST. For example, to earn $1200/week after tax, working 25 hours/week, you need to earn $68/hour before tax.
+The gross hourly incomes needed are displayed in the body of the table in New Zealand dollars, rounded to the nearest dollar and excluding GST. 
+For example, to earn $1200/week after tax, working 25 hours/week, you need to earn $68/hour before tax.
+
+(*) NZ workers get 4 weeks annual leave plus roughly 1 week of public holidays
 
 Requires
 --------
-- Scipy, for scipy.optimize.brentq, a root finder
-
-Usage
-------
-Run as a script to produce the table above.
-Otherwise use as a module to assist in NZ tax calculations.
+- Scipy for the root finder scipy.optimize.brentq
