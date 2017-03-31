@@ -44,6 +44,11 @@ For example, to earn $1200/week after tax, working 25 hours/week, you need to ea
 (*) = NZ workers get 4 weeks annual leave plus roughly 2 weeks of public holidays
 
 
+Requirements
+============
+None, unless you want to develop, in which case you should ``pip install requirements.txt``.
+
+
 Authors
 ========
 - Alex Raichev (2014-07)
