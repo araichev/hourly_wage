@@ -1,5 +1,5 @@
 Hourly Wage
-============
+************
 Suppose you work in New Zealand, would like to earn a given net weekly income for 52 weeks per year after income tax, and would like to work a given number of hours per week for 46 weeks per year (*). 
 What gross hourly income must you earn?
 
