@@ -42,3 +42,22 @@ The gross hourly incomes needed are displayed in the body of the table in New Ze
 For example, to earn $1200/week after tax, working 25 hours/week, you need to earn $68/hour before tax.
 
 (*) = NZ workers get 4 weeks annual leave plus roughly 2 weeks of public holidays
+
+
+Authors
+========
+- Alex Raichev (2014-07)
+
+
+History
+========
+
+v1.0.0, 2017-03-31
+-------------------
+Removed SciPy dependence
+
+
+v0.0.0, 2014-07-27
+------------------
+First release
+
